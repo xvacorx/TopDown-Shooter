@@ -8,8 +8,11 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] Transform shootingPoint;
 
     public bool shootingEnabled = true;
+
+    PlayerManager playerManager;
     void Start()
     {
+        playerManager = GetComponent<PlayerManager>();
         StartCoroutine(ShootContinuously());
     }
 
@@ -22,7 +25,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 Shoot();
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(playerManager.attackSpeed);
         }
     }
     void Shoot()
