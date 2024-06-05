@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class HealPowerUp : PowerUp
 {
+    public float healthIncrease = 20f;
     public override void ApplyPowerUp(GameObject player)
     {
-        Debug.Log("Healed");
+        PlayerManager playerScript = player.GetComponent<PlayerManager>();
+        if (playerScript != null)
+        {
+            playerScript.Heal(healthIncrease);
+        }
     }
 }
