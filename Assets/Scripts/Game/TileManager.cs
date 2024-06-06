@@ -6,8 +6,9 @@ public class TileManager : MonoBehaviour
 {
     public GameObject[] tilePrefabs;
     public Transform player;
+    public Transform tileParent;
     public int tileSize = 4;
-    public int viewDistance = 4;      // Distancia en tiles a la que se generan los tiles alrededor del jugador
+    public int viewDistance = 4;
 
     private Dictionary<Vector2Int, GameObject> tiles = new Dictionary<Vector2Int, GameObject>();
     private Vector2Int playerTilePosition;
@@ -41,8 +42,9 @@ public class TileManager : MonoBehaviour
 
                 if (!tiles.ContainsKey(tilePosition))
                 {
-                    Vector3 tileWorldPosition = new Vector3(tilePosition.x * tileSize, 0, tilePosition.y * tileSize);
+                    Vector3 tileWorldPosition = new Vector3(tilePosition.x * tileSize, -1, tilePosition.y * tileSize);
                     GameObject tile = Instantiate(GetRandomTilePrefab(), tileWorldPosition, Quaternion.identity);
+                    tile.transform.SetParent(tileParent);
                     tiles[tilePosition] = tile;
                 }
             }

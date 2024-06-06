@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] GameObject projectile;
     [SerializeField] Transform shootingPoint;
+    [SerializeField] Transform projectileParent;
 
     public bool shootingEnabled = true;
 
@@ -19,7 +20,6 @@ public class PlayerShoot : MonoBehaviour
     IEnumerator ShootContinuously()
     {
         while (true)
-
         {
             if (shootingEnabled)
             {
@@ -28,8 +28,10 @@ public class PlayerShoot : MonoBehaviour
             yield return new WaitForSeconds(playerManager.attackSpeed);
         }
     }
+
     void Shoot()
     {
-        Instantiate(projectile, shootingPoint.position, shootingPoint.rotation);
+        GameObject instantiatedProjectile = Instantiate(projectile, shootingPoint.position, shootingPoint.rotation);
+        instantiatedProjectile.transform.SetParent(projectileParent);
     }
 }

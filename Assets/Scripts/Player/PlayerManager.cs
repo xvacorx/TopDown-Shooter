@@ -7,9 +7,9 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
-    public float hP = 100f;  // Initialize HP to a default value
-    public float damage = 1f;  // Initialize damage to a default value
-    public float attackSpeed = 1f;  // Initialize attackSpeed to a default value
+    public float hP = 100f;
+    public float damage = 1f;
+    public float attackSpeed = 1f;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
         hP -= value;
         if (hP < 0)
         {
-            hP = 0;  // Ensure HP doesn't go below 0
+            hP = 0;
             Debug.Log("Death");
         }
     } // Recive Damage
@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
         hP += value;
         if (hP > 100)
         {
-            hP = 100f;  // Ensure HP doesn't exceed 100
+            hP = 100f;
         }
     } // Restore Health
 
@@ -48,7 +48,7 @@ public class PlayerManager : MonoBehaviour
         attackSpeed -= value;
         if (attackSpeed < 0.1f)
         {
-            attackSpeed = 0.1f;  // Ensure attack speed doesn't go below 0.1
+            attackSpeed = 0.1f;
         }
     } // Increase Attack Speed
 
@@ -57,7 +57,7 @@ public class PlayerManager : MonoBehaviour
         attackSpeed += value;
         if (attackSpeed > 1f)
         {
-            attackSpeed = 1f;  // Ensure attack speed doesn't exceed 1
+            attackSpeed = 1f;
         }
     } // Lower Attack Speed
 
@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
         damage += value;
         if (damage > 10f)
         {
-            damage = 10f;  // Ensure damage doesn't exceed 10
+            damage = 10f;
         }
     } // Increase Damage
 
@@ -75,7 +75,7 @@ public class PlayerManager : MonoBehaviour
         damage -= value;
         if (damage < 1f)
         {
-            damage = 1f;  // Ensure damage doesn't go below 1
+            damage = 1f;
         }
     } // Decrease Damage
 }

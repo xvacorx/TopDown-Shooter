@@ -13,5 +13,4 @@ public class DamagePowerUp : PowerUp
             playerScript.IncreaseDamage(damageIncrease);
         }
     }
-
 }
