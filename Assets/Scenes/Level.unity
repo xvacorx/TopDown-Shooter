@@ -571,9 +571,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefabs:
   - {fileID: 5423529233932775037, guid: 23b139ad348997a4a87f424152544895, type: 3}
+  - {fileID: 969179293251784877, guid: ea9179416332b36469c35fcdf944a693, type: 3}
+  - {fileID: 5968143856187337613, guid: f9bebe6fb3ef9b048b54af850de8be5b, type: 3}
   player: {fileID: 1962844168}
   tileParent: {fileID: 173845681}
-  tileSize: 1
+  tileSize: 10
   viewDistance: 4
 --- !u!4 &1254032346
 Transform:

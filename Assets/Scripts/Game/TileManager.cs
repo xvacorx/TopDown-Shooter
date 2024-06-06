@@ -42,7 +42,7 @@ public class TileManager : MonoBehaviour
 
                 if (!tiles.ContainsKey(tilePosition))
                 {
-                    Vector3 tileWorldPosition = new Vector3(tilePosition.x * tileSize, -1, tilePosition.y * tileSize);
+                    Vector3 tileWorldPosition = new Vector3(tilePosition.x * tileSize, 0, tilePosition.y * tileSize);
                     GameObject tile = Instantiate(GetRandomTilePrefab(), tileWorldPosition, Quaternion.identity);
                     tile.transform.SetParent(tileParent);
                     tiles[tilePosition] = tile;
