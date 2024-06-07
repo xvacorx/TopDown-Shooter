@@ -1,10 +1,12 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public float hp;
+    public bool alive = true;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("PlayerProjectile") && PlayerManager.Instance != null)
@@ -18,12 +20,9 @@ public class Enemy : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
+            alive = false;
             Die();
         }
     }
-    private void Die()
-    {
-        Debug.Log("Enemy died");
-        Destroy(gameObject);
-    }
+    public abstract void Die();
 }
