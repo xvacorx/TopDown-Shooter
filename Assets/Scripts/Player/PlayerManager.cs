@@ -10,6 +10,12 @@ public class PlayerManager : MonoBehaviour
     public float hP = 100f;
     public float damage = 1f;
     public float attackSpeed = 1f;
+    public bool playerAlive = true;
+
+    private Animator playerAnimator;
+    PlayerMovement playerMovement;
+
+    Rigidbody rb;
 
     private void Awake()
     {
@@ -24,6 +30,27 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        playerAnimator = GetComponentInChildren<Animator>(true);
+        playerMovement = GetComponent<PlayerMovement>();
+        rb = GetComponent<Rigidbody>();
+    }
+
+    public void ResetPlayer()
+    {
+        hP = 100f;
+        damage = 1f;
+        attackSpeed = 1f;
+        playerAlive = true;
+        playerMovement.enabled = true;
+
+        if (!rb.isKinematic)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+    }
+
     public void LoseHealth(float value)
     {
         hP -= value;
@@ -31,15 +58,22 @@ public class PlayerManager : MonoBehaviour
         {
             hP = 0;
             Debug.Log("Death");
+            DeathAnimation();
+            playerMovement.enabled = false;
+            playerAlive = false;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
     } // Recive Damage
 
     public void Heal(float value)
     {
-        hP += value;
-        if (hP > 100)
+        if (playerAlive)
         {
-            hP = 100f;
+            hP += value;
+            if (hP > 100)
+            {
+                hP = 100f;
+            }
         }
     } // Restore Health
 
@@ -78,4 +112,22 @@ public class PlayerManager : MonoBehaviour
             damage = 1f;
         }
     } // Decrease Damage
+
+    public Animator GetAnimator()
+    {
+        return playerAnimator;
+    } // Assigns the animator to the script which calls it
+
+    public void ShootAnimation()
+    {
+        playerAnimator.SetTrigger("shoot");
+    }
+
+    public void DeathAnimation()
+    {
+        if (playerAlive)
+        {
+            playerAnimator.SetTrigger("death");
+        }
+    }
 }

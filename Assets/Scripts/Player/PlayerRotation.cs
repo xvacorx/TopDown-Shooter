@@ -6,10 +6,18 @@ public class PlayerRotation : MonoBehaviour
 {
     public Camera mainCamera;
     public LayerMask groundLayer;
+    private PlayerManager manager;
+    private void Start()
+    {
+        manager = PlayerManager.Instance;
+    }
 
     void Update()
     {
-        RotateTowardsMouse();
+        if (manager.playerAlive)
+        {
+            RotateTowardsMouse();
+        }
     }
 
     void RotateTowardsMouse()

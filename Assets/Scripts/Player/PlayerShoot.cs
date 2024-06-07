@@ -10,9 +10,11 @@ public class PlayerShoot : MonoBehaviour
 
     public bool shootingEnabled = true;
 
-    PlayerManager playerManager;
+    private PlayerManager playerManager;
+    private Animator playerAnimator;
     void Start()
     {
+        playerAnimator = GetComponentInChildren<Animator>(true);
         playerManager = GetComponent<PlayerManager>();
         StartCoroutine(ShootContinuously());
     }
@@ -21,7 +23,7 @@ public class PlayerShoot : MonoBehaviour
     {
         while (true)
         {
-            if (shootingEnabled)
+            if (playerManager.playerAlive)
             {
                 Shoot();
             }
@@ -33,5 +35,6 @@ public class PlayerShoot : MonoBehaviour
     {
         GameObject instantiatedProjectile = Instantiate(projectile, shootingPoint.position, shootingPoint.rotation);
         instantiatedProjectile.transform.SetParent(projectileParent);
+        playerAnimator.SetTrigger("shoot");
     }
 }
