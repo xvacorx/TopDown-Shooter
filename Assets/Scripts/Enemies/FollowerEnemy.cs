@@ -23,7 +23,8 @@ public class FollowerEnemy : Enemy
 
             transform.position += direction * speed * Time.deltaTime;
 
-            transform.LookAt(player);
+            Vector3 lookPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
+            transform.LookAt(lookPosition);
             anim.SetBool("isMoving", true);
         }
         else { anim.SetBool("isMoving", false); }

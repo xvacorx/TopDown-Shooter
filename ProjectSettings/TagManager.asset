@@ -8,6 +8,8 @@ TagManager:
   - PowerUp
   - PlayerProjectile
   - Ground
+  - FxTemporaire
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX

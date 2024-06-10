@@ -8,6 +8,8 @@ public abstract class Enemy : MonoBehaviour
     public float damage;
     public float hp;
     public bool alive = true;
+    public GameObject hitEffect;
+    GameObject hit;
     private void OnCollisionEnter(Collision collision)
     {
         if (alive && collision.gameObject.TryGetComponent(out PlayerManager objective))
@@ -15,10 +17,12 @@ public abstract class Enemy : MonoBehaviour
             objective.LoseHealth(damage);
         }
     }
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("PlayerProjectile") && PlayerManager.Instance != null  && alive)
         {
+            hit = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Destroy(hit, 0.5f);
             Destroy(other.gameObject);
             float playerDamage = PlayerManager.Instance.damage;
             TakeDamage(playerDamage);

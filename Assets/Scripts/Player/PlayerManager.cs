@@ -12,6 +12,9 @@ public class PlayerManager : MonoBehaviour
     public float attackSpeed = 1f;
     public bool playerAlive = true;
 
+    public GameObject hitEffect;
+    GameObject hit;
+
     private Animator playerAnimator;
     PlayerMovement playerMovement;
 
@@ -35,6 +38,16 @@ public class PlayerManager : MonoBehaviour
         playerAnimator = GetComponentInChildren<Animator>(true);
         playerMovement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyProjectile"))
+        {
+            hit = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Destroy(hit, 0.5f);
+            Destroy(other.gameObject);
+            LoseHealth(5f);
+        }
     }
 
     public void ResetPlayer()
